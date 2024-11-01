@@ -1,0 +1,13 @@
+.content {
+  background: #121212;
+}
+
+.leftCirule {
+  background: #07df6e;
+  border-radius: 0 0 100% 0;
+}
+
+.rightCirule {
+  background: #07df6e;
+  border-radius: 100% 0 0 0;
+}
