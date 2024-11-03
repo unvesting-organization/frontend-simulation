@@ -1,6 +1,7 @@
 import { Routes, Route, Outlet } from "react-router-dom";
 import Home from "./views/Home";
 import Empresas from "./views/empresas/Empresas";
+import Ranking from "./views/ranking/Ranking";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path=":grupo" element={<Outlet />}>
             <Route path="empresas" element={<Empresas />} />
+            <Route path="ranking" element={<Ranking />} />
           </Route>
         </Route>
       </Routes>
