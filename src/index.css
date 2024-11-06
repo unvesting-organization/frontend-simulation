@@ -4,5 +4,9 @@
 
 body {
   background: #121212;
-  /* font-family: Anton; */
+  font-family: "Anton", sans-serif;
+}
+
+.textArimo {
+  font-family: "Arimo", serif;
 }

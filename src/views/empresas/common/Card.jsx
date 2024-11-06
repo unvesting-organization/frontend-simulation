@@ -8,15 +8,15 @@ const Card = ({ empresa, nicho, descripcion, tazaCreci, riesgo }) => {
       </div>
 
       <div className="w-8/12 flex flex-col justify-start lg:gap-1">
-        <h2 className="text-2xl lg:text-3xl font-bold">{empresa}</h2>
-        <h3 className="-mt-2 text-lg lg:text-xl font-semibold">{nicho}</h3>
-        <p className="text-sm lg:text-lg leading-4 lg:leading-5">
+        <h2 className="text-2xl lg:text-3xl">{empresa}</h2>
+        <h3 className="-mt-2 text-lg lg:text-xl font-bold textArimo">
+          {nicho}
+        </h3>
+        <p className="text-sm lg:text-lg leading-4 lg:leading-5 font-bold textArimo">
           {descripcion}
         </p>
-        <p className="text-lg font-semibold textGreen">
-          Taza de crecimiento: {tazaCreci}%
-        </p>
-        <p className="-mt-2 text-lg font-semibold textRed">Riesgo {riesgo}</p>
+        <p className="text-lg textGreen">Taza de crecimiento: {tazaCreci}</p>
+        <p className="-mt-2 text-lg textRed">Riesgo {riesgo}</p>
       </div>
     </div>
   );
@@ -26,7 +26,7 @@ Card.propTypes = {
   empresa: PropTypes.string.isRequired,
   nicho: PropTypes.string.isRequired,
   descripcion: PropTypes.string.isRequired,
-  tazaCreci: PropTypes.number.isRequired,
+  tazaCreci: PropTypes.string.isRequired,
   riesgo: PropTypes.string.isRequired,
 };
 
