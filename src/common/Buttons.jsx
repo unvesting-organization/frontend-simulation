@@ -16,7 +16,7 @@ const Buttons = ({ handleUpdateRoute, momento }) => {
         to={
           lastSegment == "empresas"
             ? `/${grupo}/ranking`
-            : momento == 3
+            : momento == 2
             ? "/"
             : `/${grupo}/empresas`
         }
@@ -27,6 +27,11 @@ const Buttons = ({ handleUpdateRoute, momento }) => {
       </Link>
     </div>
   );
+};
+
+Buttons.propTypes = {
+  handleUpdateRoute: PropTypes.func.isRequired,
+  momento: PropTypes.number.isRequired,
 };
 
 export default Buttons;

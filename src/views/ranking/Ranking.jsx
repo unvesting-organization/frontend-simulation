@@ -1,60 +1,65 @@
 import RankinCard from "./common/RankinCard";
-import Buttons from "../../common/Buttons";
 
-import { ranking } from "./data/ranking";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
 
-const Ranking = ({ momento, handleChangeView }) => {
-  const { grupo } = useParams();
-  // const [empresas, setEmpresas] = useState([]);
-  // const [loading, setLoading] = useState(true);
+const Ranking = ({ momento }) => {
+  // const { grupo } = useParams();
+  const [ranking, setRanking] = useState([]);
+  const [loading, setLoading] = useState(true);
   // const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
 
-  // useEffect(() => {
-  //   const fetchEmpresas = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://api-workshop-silumation.vercel.app/companies_data?time=${momento}&key=Beta0`
-  //       );
-  //       setLoading(false);
-  //       setEmpresas(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching empresas data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchRanking = async () => {
+      try {
+        const response = await axios.get(
+          `https://api-workshop-silumation.vercel.app/process?time=${
+            momento + 1
+          }&key=Beta0`
+        );
+        setLoading(false);
+        setRanking(response.data);
+      } catch (error) {
+        console.error("Error fetching ranking data:", error);
+      }
+    };
 
-  //   fetchEmpresas();
-  // }, [momento]);
+    fetchRanking();
+  }, [momento]);
 
-  // if (loading) {
-  //   return <h1 className="">Loading...</h1>;
-  // }
+  if (loading) {
+    return <h1 className="text-white text-center">Cargando los datos...</h1>;
+  }
+
+  console.log(ranking);
 
   return (
     <div className="flex flex-col justify-center items-center gap-8">
-      {/* <Buttons ruteAnt={`/${grupo}/empresas`} ruteSig={`/`} /> */}
       <h2 className="text-white text-3xl lg:text-4xl">RANKING</h2>
 
-      <div className="w-full flex flex-col gap-8 justify-center items-center xl:items-start">
+      <div className="w-full flex flex-col gap-8 justify-center items-center">
         <div className="w-full flex flex-wrap justify-center gap-3">
           {ranking.slice(0, 5).map((item, index) => (
             <RankinCard
               key={index}
               number={index + 1}
-              name={item.nombre}
-              porcentaje={item.porcentaje}
+              name={item.user_id}
+              porcentaje={item.net_worth}
+              empresas={item.companies}
             />
           ))}
         </div>
 
-        <div className="w-10/12 lg:w-7/12 xl:w-5/12 xl:ml-20 mb-5 px-4 py-3 bg-black flex flex-wrap justify-between gap-x-4 rounded-xl text-sm">
+        <div className="w-10/12 lg:w-7/12 xl:w-7/12 mb-5 px-4 py-3 bg-black flex flex-wrap justify-between gap-x-4 rounded-xl text-sm">
           {ranking.slice(5).map((item, index) => (
-            <p key={index} className="text-white xl:text-lg">
+            <p key={index} className="xl:w-5/12 text-white xl:text-lg">
               {index + 6}.{" "}
               <span className="textArimo">
-                {item.nombre}{" "}
-                <span className="textGreen">{item.porcentaje}%</span>
+                {item.user_id}{" "}
+                <span className="textGreen">{item.net_worth.toFixed(2)}%</span>{" "}
+                {item.companies.join(" / ")}
               </span>
             </p>
           ))}
@@ -62,6 +67,10 @@ const Ranking = ({ momento, handleChangeView }) => {
       </div>
     </div>
   );
+};
+
+Ranking.propTypes = {
+  momento: PropTypes.number.isRequired,
 };
 
 export default Ranking;

@@ -1,48 +1,16 @@
 import { useEffect, useState } from "react";
-import Buttons from "../../common/Buttons";
 import Card from "./common/Card";
 
 import axios from "axios";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
-// const empresas = [
-//   {
-//     name: "Empresa 1",
-//     nicho: "Técnología",
-//     descripcion: "Esta es una empresa de tecnología dedicada",
-//     tazaCreci: 30,
-//     riesgo: "medio",
-//   },
-//   {
-//     name: "Empresa 2",
-//     nicho: "Energía",
-//     descripcion: "Esta es una empresa de tecnología dedicada",
-//     tazaCreci: 24,
-//     riesgo: "alto",
-//   },
-//   {
-//     name: "Empresa 3",
-//     nicho: "Técnología",
-//     descripcion: "Esta es una empresa de tecnología dedicada",
-//     tazaCreci: 46,
-//     riesgo: "medio",
-//   },
-//   {
-//     name: "Empresa 4",
-//     nicho: "Energía",
-//     descripcion: "Esta es una empresa de tecnología dedicada",
-//     tazaCreci: 24,
-//     riesgo: "bajo",
-//   },
-// ];
-
 const Empresas = ({ momento }) => {
-  const { grupo } = useParams();
+  // const { grupo } = useParams();
   const [empresas, setEmpresas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
+  // const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
 
   useEffect(() => {
     const fetchEmpresas = async () => {
@@ -61,12 +29,11 @@ const Empresas = ({ momento }) => {
   }, [momento]);
 
   if (loading) {
-    return <h1 className="">Loading...</h1>;
+    return <h1 className="text-white text-center">Cargando los datos...</h1>;
   }
 
   return (
     <div className="flex flex-col justify-center items-center gap-6 lg:gap-9">
-      {/* <Buttons ruteAnt="/" ruteSig={`/${grupo}/ranking`} sig /> */}
       <h2 className="text-white text-4xl lg:text-5xl">EMPRESAS</h2>
 
       <div className="w-full flex flex-col lg:flex-row flex-wrap justify-center items-center lg:items-stretch gap-3">
@@ -78,6 +45,7 @@ const Empresas = ({ momento }) => {
             descripcion={empresa.Descripcion}
             tazaCreci={empresa.Crecimiento}
             riesgo={empresa.Riesgo}
+            valor={empresa.Valor}
           />
         ))}
       </div>

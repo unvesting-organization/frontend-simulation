@@ -5,6 +5,7 @@ import Ranking from "./views/ranking/Ranking";
 import Buttons from "./common/Buttons";
 
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import unvestingLogo from "./assets/img/unvesting_logo.png";
 import "./App.css";
@@ -18,10 +19,15 @@ const Layout = ({ handleUpdateRoute, momento }) => {
   );
 };
 
+Layout.propTypes = {
+  handleUpdateRoute: PropTypes.func.isRequired,
+  momento: PropTypes.number.isRequired,
+};
+
 function App() {
   const [momento, setMomento] = useState(() => {
     const momento = localStorage.getItem("momento");
-    return momento ? momento : 1;
+    return momento ? momento : 0;
   });
 
   const navigate = useNavigate();
@@ -35,13 +41,13 @@ function App() {
   };
 
   const resetMomentos = () => {
-    setMomento(1);
+    setMomento(0);
     resetMomentoStorage();
   };
 
   const updateMomento = () => {
     const siguienteMomento = momento + 1;
-    if (siguienteMomento > 3) {
+    if (siguienteMomento > 2) {
       resetMomentos();
       alert("Fin de la simulación");
       navigate("/");

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-const Card = ({ empresa, nicho, descripcion, tazaCreci, riesgo }) => {
+const Card = ({ empresa, nicho, descripcion, tazaCreci, riesgo, valor }) => {
   return (
-    <div className="w-10/12 lg:w-5/12 p-2 bg-white rounded-xl flex items-center gap-3 ">
+    <div className="w-10/12 lg:w-5/12 p-2 bg-white rounded-xl flex items-center gap-3 relative">
       <div className="w-24 lg:w-32 h-24 lg:h-32 rounded-xl card">
         <img src="" alt="" />
       </div>
@@ -18,6 +18,7 @@ const Card = ({ empresa, nicho, descripcion, tazaCreci, riesgo }) => {
         <p className="text-lg textGreen">Taza de crecimiento: {tazaCreci}</p>
         <p className="-mt-2 text-lg textRed">Riesgo {riesgo}</p>
       </div>
+      <p className="absolute bottom-2 right-3 textGreen">Valor: {valor}</p>
     </div>
   );
 };
@@ -28,6 +29,7 @@ Card.propTypes = {
   descripcion: PropTypes.string.isRequired,
   tazaCreci: PropTypes.string.isRequired,
   riesgo: PropTypes.string.isRequired,
+  valor: PropTypes.number.isRequired,
 };
 
 export default Card;
