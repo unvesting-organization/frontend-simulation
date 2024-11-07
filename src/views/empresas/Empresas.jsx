@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import Card from "./common/Card";
 
 import axios from "axios";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Empresas = ({ momento }) => {
-  // const { grupo } = useParams();
+  const { grupo } = useParams();
   const [empresas, setEmpresas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
+  const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
 
   useEffect(() => {
     const fetchEmpresas = async () => {
       try {
         const response = await axios.get(
-          `https://api-workshop-silumation.vercel.app/companies_data?time=${momento}&key=Beta0`
+          `https://api-workshop-silumation.vercel.app/companies_data?time=${momento}&key=${grupoRuta}`
         );
         setLoading(false);
         setEmpresas(response.data);
@@ -26,7 +26,7 @@ const Empresas = ({ momento }) => {
     };
 
     fetchEmpresas();
-  }, [momento]);
+  }, [momento, grupoRuta]);
 
   if (loading) {
     return <h1 className="text-white text-center">Cargando los datos...</h1>;
@@ -39,6 +39,7 @@ const Empresas = ({ momento }) => {
       <div className="w-full flex flex-col lg:flex-row flex-wrap justify-center items-center lg:items-stretch gap-3">
         {empresas.map((empresa, index) => (
           <Card
+            momento={momento}
             key={index}
             empresa={empresa.Nombre}
             nicho={empresa.Nicho}
@@ -46,6 +47,7 @@ const Empresas = ({ momento }) => {
             tazaCreci={empresa.Crecimiento}
             riesgo={empresa.Riesgo}
             valor={empresa.Valor}
+            cambio={empresa.Cambio}
           />
         ))}
       </div>

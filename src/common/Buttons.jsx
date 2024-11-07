@@ -8,7 +8,15 @@ const Buttons = ({ handleUpdateRoute, momento }) => {
   const lastSegment = pathSegments[pathSegments.length - 1];
   return (
     <div className="text-white flex gap-5 absolute top-5 right-5">
-      <Link to={lastSegment == "empresas" ? `/` : `/${grupo}/empresas`}>
+      <Link
+        to={
+          lastSegment == "empresas"
+            ? `/`
+            : lastSegment == "ranking"
+            ? `/${grupo}/empresas`
+            : `/${grupo}/ranking`
+        }
+      >
         <p>Volver</p>
       </Link>
 
@@ -16,12 +24,14 @@ const Buttons = ({ handleUpdateRoute, momento }) => {
         to={
           lastSegment == "empresas"
             ? `/${grupo}/ranking`
+            : lastSegment == "ranking"
+            ? `/${grupo}/video`
             : momento == 2
             ? "/"
             : `/${grupo}/empresas`
         }
       >
-        <p onClick={lastSegment == "ranking" ? handleUpdateRoute : null}>
+        <p onClick={lastSegment == "video" ? handleUpdateRoute : null}>
           Siguiente
         </p>
       </Link>

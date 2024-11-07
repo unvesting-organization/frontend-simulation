@@ -2,6 +2,7 @@ import { Routes, Route, Outlet, Link, useNavigate } from "react-router-dom";
 import Home from "./views/Home";
 import Empresas from "./views/empresas/Empresas";
 import Ranking from "./views/ranking/Ranking";
+import Video from "./views/video/Video";
 import Buttons from "./common/Buttons";
 
 import { useState } from "react";
@@ -80,6 +81,7 @@ function App() {
           >
             <Route path="empresas" element={<Empresas momento={momento} />} />
             <Route path="ranking" element={<Ranking momento={momento} />} />
+            <Route path="video" element={<Video momento={momento} />} />
           </Route>
         </Route>
       </Routes>

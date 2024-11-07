@@ -1,15 +1,15 @@
 import RankinCard from "./common/RankinCard";
 
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
 const Ranking = ({ momento }) => {
-  // const { grupo } = useParams();
+  const { grupo } = useParams();
   const [ranking, setRanking] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
+  const grupoRuta = grupo == "mañana" ? "Alpha1" : "Dragon2";
 
   useEffect(() => {
     const fetchRanking = async () => {
@@ -17,7 +17,7 @@ const Ranking = ({ momento }) => {
         const response = await axios.get(
           `https://api-workshop-silumation.vercel.app/process?time=${
             momento + 1
-          }&key=Beta0`
+          }&key=${grupoRuta}`
         );
         setLoading(false);
         setRanking(response.data);
@@ -27,7 +27,7 @@ const Ranking = ({ momento }) => {
     };
 
     fetchRanking();
-  }, [momento]);
+  }, [momento, grupoRuta]);
 
   if (loading) {
     return <h1 className="text-white text-center">Cargando los datos...</h1>;
@@ -59,7 +59,9 @@ const Ranking = ({ momento }) => {
               <span className="textArimo">
                 {item.user_id}{" "}
                 <span className="textGreen">{item.net_worth.toFixed(2)}%</span>{" "}
-                {item.companies.join(" / ")}
+                <span className={item.companies < 0 ? "textRed" : null}>
+                  {item.companies.join(" / ")}
+                </span>
               </span>
             </p>
           ))}

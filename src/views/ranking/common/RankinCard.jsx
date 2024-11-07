@@ -7,7 +7,9 @@ const RankinCard = ({ number, name, porcentaje, empresas }) => {
       <p className="text-lg xl:text-2xl">{name}</p>
       <p className="text-base xl:text-bases">{empresas.join(" / ")}</p>
       <p className="xl:text-lg absolute bottom-1 right-2 textGreen">
-        {porcentaje.toFixed(2)}%
+        <span className={porcentaje < 0 ? "textRed" : null}>
+          {porcentaje.toFixed(2)}%
+        </span>
       </p>
     </div>
   );
