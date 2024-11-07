@@ -52,20 +52,24 @@ const Ranking = ({ momento }) => {
           ))}
         </div>
 
-        <div className="w-10/12 lg:w-7/12 xl:w-7/12 mb-5 px-4 py-3 bg-black flex flex-wrap justify-between gap-x-4 rounded-xl text-sm">
-          {ranking.slice(5).map((item, index) => (
-            <p key={index} className="xl:w-5/12 text-white xl:text-lg">
-              {index + 6}.{" "}
-              <span className="textArimo">
-                {item.user_id}{" "}
-                <span className="textGreen">{item.net_worth.toFixed(2)}%</span>{" "}
-                <span className={item.companies < 0 ? "textRed" : null}>
-                  {item.companies.join(" / ")}
+        {ranking.length > 5 && (
+          <div className="w-10/12 lg:w-7/12 xl:w-7/12 mb-5 px-4 py-3 bg-black flex flex-wrap justify-between gap-x-4 rounded-xl text-sm">
+            {ranking.slice(5).map((item, index) => (
+              <p key={index} className="xl:w-5/12 text-white xl:text-lg">
+                {index + 6}.{" "}
+                <span className="textArimo">
+                  {item.user_id}{" "}
+                  <span className="textGreen">
+                    {item.net_worth.toFixed(2)}%
+                  </span>{" "}
+                  <span className={item.companies < 0 ? "textRed" : null}>
+                    {item.companies.join(" / ")}
+                  </span>
                 </span>
-              </span>
-            </p>
-          ))}
-        </div>
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

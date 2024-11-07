@@ -11,6 +11,7 @@ const Card = ({
   cambio,
   imagen,
 }) => {
+  console.log("URL de la imagen:", imagen);
   return (
     <div className="w-10/12 lg:w-5/12 p-2 bg-white rounded-xl flex items-center gap-3 relative">
       <div className="w-24 lg:w-32 h-24 lg:h-32 rounded-xl card">

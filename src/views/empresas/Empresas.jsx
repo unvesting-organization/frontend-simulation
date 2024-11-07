@@ -48,7 +48,7 @@ const Empresas = ({ momento }) => {
             riesgo={empresa.Riesgo}
             valor={empresa.Valor}
             cambio={empresa.Cambio}
-            imagen={empresa.Imagen}
+            imagen={empresa.Image}
           />
         ))}
       </div>
